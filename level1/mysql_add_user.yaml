@@ -1,0 +1,10 @@
+---
+# create mysql group and user
+- hosts: dbsrves
+  remote_user: root
+ 
+  tasks:
+  - name: add group
+    group: name=test system=yes gid=336
+  - name: add user
+    user: name=test shell=/sbin/nologin system=yes group=mysql uid=336 home=/data/mysql create_home=no

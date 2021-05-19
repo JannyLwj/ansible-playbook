@@ -1,0 +1,6 @@
+---
+- hosts: dbsrves
+  remote_user: root
+  tasks:
+  - name: uninstall mysql
+    yum: name=mysql state=absent
