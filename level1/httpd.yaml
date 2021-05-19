@@ -1,12 +1,19 @@
 ---
 - hosts: all
   remote_user: root
+  gather_facts: no
   tasks:
   - name: install httpd
     yum: name=httpd
   - name: update configuration file
-    copy: src=/tmp/http.conf dest=/etc/httpd/conf
+    copy: src=/tmp/httpd.conf dest=/etc/httpd/conf
+    notify: restart httpd
+    tags: config
   - name: update configuration file
     copy: src=/tmp/welcome.conf dest=/etc/httpd/conf.d
   - name: start httpd
     service: name=httpd state=started enabled=yes
+
+  handlers:
+  - name: restart httpd
+    service: name=httpd state=restarted

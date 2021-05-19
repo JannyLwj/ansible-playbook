@@ -1,0 +1,8 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: create a file
+    file: path=/var/log/{{ ansible_nodename }}.log state=touch
+
